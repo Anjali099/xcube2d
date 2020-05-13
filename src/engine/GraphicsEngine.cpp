@@ -207,6 +207,8 @@ void GraphicsEngine::drawRect(const int &x, const int &y, const int &w, const in
 	SDL_RenderDrawRect(renderer, &rect);
 }
 
+
+
 void GraphicsEngine::fillRect(SDL_Rect * rect) {
 	SDL_RenderFillRect(renderer, rect);
 }
@@ -226,6 +228,11 @@ void GraphicsEngine::drawLine(const Line2i & line) {
 
 void GraphicsEngine::drawLine(const Point2 & p0, const Point2 & p1) {
 	SDL_RenderDrawLine(renderer, p0.x, p0.y, p1.x, p1.y);
+}
+
+void GraphicsEngine::drawRay(const Point2& start, const Point2& end)
+{
+	SDL_RenderDrawLine(renderer, start.x,start.y,end.x,end.y);
 }
 
 void GraphicsEngine::drawCircle(const Point2 & center, const float & radius) {

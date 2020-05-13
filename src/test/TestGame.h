@@ -15,7 +15,7 @@ class TestGame : public AbstractGame {
 	private:
 		Rect box;
 		Rect light;
-
+		Block b;
 		Vector2i velocity;
 
 		MazeGenerator * gen;
@@ -26,7 +26,7 @@ class TestGame : public AbstractGame {
 		/* GAMEPLAY */
 		int score, keys, lives;
 		bool gameWon;
-		//Block b;
+		
 		void handleKeyEvents();
 		void update();
 		void render();

@@ -39,12 +39,12 @@ void PhysicsEngine::update()
 {
 
 }
-
+Block::Block(int x, int y, int w, int h) :x(x), y(y), w(w), h(h) {}
 
 void Raycast::drawBlocks(Block a,int size)
 {
 	
-	Raycast::blockObjects.capacity() == size;
+	Raycast::blockObjects.size() == size;
 	//ree
 
 	for (int i = 0; i < Raycast::blockObjects.size(); i++)
@@ -68,6 +68,7 @@ void Raycast::drawBlocks(Block a,int size)
 		
 	}
 	blockObjects.push_back(a); // puts my blocks in an array
+	
 }
 Raycast::Raycast(Block b) {
 
@@ -78,7 +79,8 @@ Raycast::Raycast(Block b) {
 	endpos.x = b.boundingbox.x;
 	endpos.y = b.boundingbox.y;
 
-	//raycastLine = Line2i(startpos, endpos); // should draw a line from start postion(5,10) to endpos
+	raycastLine = Line2i(startpos, endpos); // should draw a line from start postion(5,10) to endpos
 
 
 }
+

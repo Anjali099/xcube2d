@@ -13,6 +13,7 @@ class PhysicsObject;
 class PhysicsEngine {
 	friend class XCube2Engine;
 	friend class PhysicsObject;
+	friend class Block;
 	private:
 		Vector2f gravity;
 		PhysicsEngine();
@@ -31,19 +32,15 @@ class PhysicsEngine {
 };
 class Block
 {
-	
-	
-	//Block(int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {}; // ??
+	int x, y, w, h;
 
-	
 public:
-	
-	
 	int block_type;// 0 for one type and 1 for another (glass) i think
 	SDL_Color colour;
-	 Rect boundingbox;
-		//Block();
-	 int x, y, w, h;
+	Rectangle2 boundingbox;
+	
+	//Block();
+	//Block(int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {}
 	 Block(int x, int y, int w, int h);
 };
 class Raycast {

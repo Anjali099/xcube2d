@@ -8,7 +8,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
-
+#include "PhysicsEngine.h"
 #include "EngineCommon.h"
 #include "GameMath.h"
 
@@ -84,13 +84,14 @@ class GraphicsEngine {
 		void drawRect(SDL_Rect *, const SDL_Color &);
 		void drawRect(SDL_Rect *);
 		void drawRect(const int &x, const int &y, const int &w, const int &h);
-
+	
 		void fillRect(SDL_Rect *);
 		void fillRect(const int &x, const int &y, const int &w, const int &h);
 
 		void drawPoint(const Point2 &);
 		void drawLine(const Line2i &);
 		void drawLine(const Point2 & start, const Point2 & end);
+		void drawRay(const Point2& start, const Point2& end); // a draw ray func
 		void drawCircle(const Point2 & center, const float & radius);
 		void drawEllipse(const Point2 & center, const float & radiusX, const float & radiusY);
 		void drawTexture(SDL_Texture *, SDL_Rect * src, SDL_Rect * dst, const double & angle = 0.0, const SDL_Point * center = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
