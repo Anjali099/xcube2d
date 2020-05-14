@@ -15,7 +15,7 @@ class TestGame : public AbstractGame {
 	private:
 		Rect box;
 		Rect light;
-		Block b;
+		Block bblock;
 		Vector2i velocity;
 
 		MazeGenerator * gen;

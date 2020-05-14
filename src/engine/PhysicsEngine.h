@@ -14,6 +14,7 @@ class PhysicsEngine {
 	friend class XCube2Engine;
 	friend class PhysicsObject;
 	friend class Block;
+	friend class Raycast;
 	private:
 		Vector2f gravity;
 		PhysicsEngine();
@@ -31,34 +32,34 @@ class PhysicsEngine {
 		void registerObject(std::shared_ptr<PhysicsObject>);
 };
 class Block
-{
-	int x, y, w, h;
-
+{	
+	friend class XCube2Engine;
+	friend class PhysicsEngine;
+	friend class Rectangle2;
 public:
 	int block_type;// 0 for one type and 1 for another (glass) i think
 	SDL_Color colour;
-	Rectangle2 boundingbox;
+	SDL_Rect boundingbox;
 	
 	//Block();
 	//Block(int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {}
-	 Block(int x, int y, int w, int h);
+	int x, y, w, h;
+	Block(int x, int y, int w, int h,SDL_Color,int t);
+	
+
 };
 class Raycast {
-
+	friend class Block;
 	//int x, y;
-	//Raycast(int x, int y) : x(x), y(y) {}
-private:
-
-	//array for all my objects
-	
+	//Raycast(int x, int y) : x(x), y(y) {}	
 public:
 	Line2i raycastLine;
 	Point2 startpos;
 	Point2 endpos;
 	std::vector <Block> blockObjects;
-	Raycast(Block b);
+	Raycast(Block b, int x, int y);
 	
-	void drawBlocks(Block a,int size);
+	void drawBlocksArray(Block a,int size);
     // add block objects and do the raycast
 	
 };

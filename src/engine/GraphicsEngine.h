@@ -77,12 +77,13 @@ class GraphicsEngine {
 		* Call this method after you have finished drawing
 		*/
 		void showScreen();
-
+		
 		void drawRect(const Rectangle2 &);
 		void drawRect(const Rectangle2 &, const SDL_Color &);
 
 		void drawRect(SDL_Rect *, const SDL_Color &);
 		void drawRect(SDL_Rect *);
+		void drawBlocks(SDL_Rect *, const SDL_Color& colour);
 		void drawRect(const int &x, const int &y, const int &w, const int &h);
 	
 		void fillRect(SDL_Rect *);

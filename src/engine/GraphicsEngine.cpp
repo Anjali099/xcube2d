@@ -1,4 +1,5 @@
 #include "GraphicsEngine.h"
+#include "PhysicsEngine.h"
 
 SDL_Renderer * GraphicsEngine::renderer = nullptr;
 
@@ -202,11 +203,16 @@ void GraphicsEngine::drawRect(SDL_Rect * rect) {
 	SDL_RenderDrawRect(renderer, rect);
 }
 
+void GraphicsEngine::drawBlocks(SDL_Rect* rect, const SDL_Color& colour) {
+	SDL_SetRenderDrawColor(renderer, colour.r, colour.g, colour.b, 255);
+	SDL_RenderDrawRect(renderer, rect);
+	SDL_SetRenderDrawColor(renderer, drawColor.r, drawColor.g, drawColor.b, 255);
+}
+
 void GraphicsEngine::drawRect(const int &x, const int &y, const int &w, const int &h) {
 	SDL_Rect rect = { x, y, w, h };
 	SDL_RenderDrawRect(renderer, &rect);
 }
-
 
 
 void GraphicsEngine::fillRect(SDL_Rect * rect) {

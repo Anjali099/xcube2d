@@ -39,9 +39,9 @@ void PhysicsEngine::update()
 {
 
 }
-Block::Block(int x, int y, int w, int h) :x(x), y(y), w(w), h(h) {}
 
-void Raycast::drawBlocks(Block a,int size)
+
+void Raycast::drawBlocksArray(Block a,int size)
 {
 	
 	Raycast::blockObjects.size() == size;
@@ -49,32 +49,31 @@ void Raycast::drawBlocks(Block a,int size)
 
 	for (int i = 0; i < Raycast::blockObjects.size(); i++)
 	{
-		// make the bb blocks all next to another
-		a.boundingbox.x += 1;
-		a.boundingbox.y += 1;
-
+		
 		if (i % 2 == 0)
 		{
 			//set block type to glass change block type and colour
 			a.block_type == 1;
-			a.colour = SDL_COLOR_AQUA;
+			a.colour = SDL_COLOR_AQUA; 
+			blockObjects.push_back(a); // puts my blocks in an array
 		}
 		else
 		{
 			a.block_type == 0;
 			a.colour = SDL_COLOR_PINK;
-
+			blockObjects.push_back(a); // puts my blocks in an array
 		}
-		
+		// make the bb blocks all next to another
+		 
 	}
-	blockObjects.push_back(a); // puts my blocks in an array
-	
+	a.boundingbox.x += 1;
+	a.boundingbox.y += 1;
 }
-Raycast::Raycast(Block b) {
+Raycast::Raycast(Block b,int x,int y) {
 
 	//*insert raycast code here* https://lodev.org/cgtutor/raycasting.html
-	startpos.x = 5;     //(5,10) start position
-	startpos.y = 10;
+	startpos.x = x;     //(0,100) start position
+	startpos.y = y;
 
 	endpos.x = b.boundingbox.x;
 	endpos.y = b.boundingbox.y;
@@ -84,3 +83,14 @@ Raycast::Raycast(Block b) {
 
 }
 
+Block::Block(int x, int y, int w, int h, SDL_Color c, int t)
+{
+	x = boundingbox.x;
+	y = boundingbox.y;
+	w = boundingbox.w;
+	h = boundingbox.h;
+
+	c = colour;
+	t = block_type;
+
+}
