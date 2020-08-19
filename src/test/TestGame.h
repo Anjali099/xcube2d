@@ -12,28 +12,29 @@ struct GameKey {
 };
 
 class TestGame : public AbstractGame {
-	private:
-		Rect box;
-		Rect light;
-		Block bblock;
-		Vector2i velocity;
+private:
+	
+	Raycast r;
+	Block bblock;
+	Block bblock2;
+	Block bblock3;
+	Vector2i velocity;
 
-		MazeGenerator * gen;
+	MazeGenerator* gen;
 
-		std::vector<std::shared_ptr<Line2i>> lines;
-		std::vector<std::shared_ptr<GameKey>> points;
+	std::vector<std::shared_ptr<Line2i>> lines;
+	std::vector<std::shared_ptr<GameKey>> points;
 
-		/* GAMEPLAY */
-		int score, keys, lives;
-		bool gameWon;
-		
-		void handleKeyEvents();
-		void update();
-		void render();
-		void renderUI();
-	public:
-		TestGame();
-		~TestGame();
+	/* GAMEPLAY */
+	
+
+	void handleKeyEvents();
+	void update();
+	void render();
+	void renderUI();
+public:
+	TestGame();
+	~TestGame();
 };
 
 #endif

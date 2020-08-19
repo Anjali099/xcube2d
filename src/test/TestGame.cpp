@@ -1,12 +1,15 @@
 #include "TestGame.h"
 
 
-TestGame::TestGame() : AbstractGame(), score(0), lives(3), keys(5), gameWon(false), box(5, 5, 30, 30), light(0, 0, 150, 150),
-bblock(50, 50, 30, 30,SDL_COLOR_AQUA,1) /*B IS THE bblock*/ {
+TestGame::TestGame() : AbstractGame(), bblock(5, 500, 70, 70, SDL_COLOR_AQUA, 1), bblock2(80, 500, 70, 70, SDL_COLOR_AQUA, 1), bblock3(155, 500, 70, 70, SDL_COLOR_AQUA, 1)   /*B IS THE bblock*/, r(bblock, 500, 500){
 	TTF_Font* font = ResourceManager::loadFont("res/fonts/arial.ttf", 72);
-
-	
-
+	//r.endpos.x = bblock.b.x;
+	//r.endpos.y = bblock.y;
+	gfx->useFont(font);
+	gfx->setVerticalSync(true);
+	r.blockObjects.push_back(bblock);
+	r.blockObjects.push_back(bblock2);
+	r.blockObjects.push_back(bblock3);
 }
 
 TestGame::~TestGame() {
@@ -18,27 +21,38 @@ void TestGame::handleKeyEvents() {
 }
 
 void TestGame::update() {
+	//std::cout << r.startpos.x << std::endl; 
+	std::cout << r.endpos.x << std::endl; 
+	//std::cout << r.blockObjects.size() << std::endl; // checks size
 	
-	
+	for (int i = 0; i <= r.blockObjects.size(); i++)
+	{
+		
+		r.drawBlocksArray(bblock);
+	}
+
 }
 
 
-
-void TestGame::render() {
-	gfx->setDrawColor(SDL_COLOR_RED);
-	gfx->drawRect(box);
-	Raycast r(bblock, 110, 300);
-	r.drawBlocksArray(bblock, 4);
+void TestGame::render() { 
 	gfx->drawPoint(r.startpos);
-	gfx->drawRect(box);
+	//gfx->drawBlocks(bblock2.boundingbox, bblock2.colour);
 	
-	for (auto b: r.blockObjects){
-
-		gfx->drawRect(&b.boundingbox);
+// made another block and pushed in the vector
+	
+	for each (Block b in r.blockObjects) {
+		
+		gfx->setDrawColor(b.colour);
+		gfx->drawBlocks(b.boundingbox, b.colour);
+	
+		//r.endpos.x = b.x;
+		//r.endpos.y = b.y;
 	}
-	gfx->drawRay(r.startpos, r.endpos);
+	gfx->setDrawColor(SDL_COLOR_RED);
+	gfx->drawLine(r.raycastLine);
 }
 
 void TestGame::renderUI() {
 
+	
 }

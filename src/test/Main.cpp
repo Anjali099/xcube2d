@@ -7,7 +7,7 @@ int main(int argc, char * args[]) {
 		game.runMainLoop();
 	} catch (EngineException & e) {
 		std::cout << e.what() << std::endl;
-		getchar();
+		//getchar();
 	}
 
 	return 0;

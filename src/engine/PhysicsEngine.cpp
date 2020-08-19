@@ -1,25 +1,25 @@
 #include "PhysicsEngine.h"
 #include "GraphicsEngine.h"
 
-PhysicsObject::PhysicsObject(const Point2 & center, float x, float y)
-: center(center), lX(x), lY(y), hlX(x / 2.0f), hlY(y / 2.0f), force(0.0f, 0.0f) {}
+PhysicsObject::PhysicsObject(const Point2& center, float x, float y)
+	: center(center), lX(x), lY(y), hlX(x / 2.0f), hlY(y / 2.0f), force(0.0f, 0.0f) {}
 
-bool PhysicsObject::isColliding(const PhysicsObject & other) {
-    Rectf r1 = { center.x - hlX, center.y - hlY, lX, lY };
-    Rectf r2 = { other.center.x - other.hlX, other.center.y - other.hlY, other.lX, other.lY };
+bool PhysicsObject::isColliding(const PhysicsObject& other) {
+	Rectf r1 = { center.x - hlX, center.y - hlY, lX, lY };
+	Rectf r2 = { other.center.x - other.hlX, other.center.y - other.hlY, other.lX, other.lY };
 
 	return r1.intersects(r2);
 }
 
-void PhysicsObject::applyForce(const Vector2f & v) {
+void PhysicsObject::applyForce(const Vector2f& v) {
 	force = v;
 }
 
-void PhysicsObject::applyGravity(const PhysicsEngine & engine) {
+void PhysicsObject::applyGravity(const PhysicsEngine& engine) {
 	center += engine.gravity;
 }
 
-void PhysicsObject::applyAntiGravity(const PhysicsEngine & engine) {
+void PhysicsObject::applyAntiGravity(const PhysicsEngine& engine) {
 	center -= engine.gravity;
 }
 
@@ -35,62 +35,61 @@ void PhysicsEngine::registerObject(std::shared_ptr<PhysicsObject> obj) {
 	objects.push_back(obj);
 }
 
-void PhysicsEngine::update() 
+void PhysicsEngine::update()
 {
 
 }
 
 
-void Raycast::drawBlocksArray(Block a,int size)
+void Raycast::drawBlocksArray(Block a)
 {
-	
-	Raycast::blockObjects.size() == size;
 	//ree
 
 	for (int i = 0; i < Raycast::blockObjects.size(); i++)
 	{
-		
+		//a.boundingbox.x += 50;
+
 		if (i % 2 == 0)
 		{
 			//set block type to glass change block type and colour
 			a.block_type == 1;
-			a.colour = SDL_COLOR_AQUA; 
-			blockObjects.push_back(a); // puts my blocks in an array
+			a.colour = SDL_COLOR_AQUA;
+			//blockObjects.push_back(a); // puts my blocks in an array
 		}
 		else
 		{
 			a.block_type == 0;
 			a.colour = SDL_COLOR_PINK;
-			blockObjects.push_back(a); // puts my blocks in an array
+			//blockObjects.push_back(a); // puts my blocks in an array
 		}
 		// make the bb blocks all next to another
-		 
+		//blockObjects.push_back(a);
 	}
-	a.boundingbox.x += 1;
-	a.boundingbox.y += 1;
-}
-Raycast::Raycast(Block b,int x,int y) {
-
-	//*insert raycast code here* https://lodev.org/cgtutor/raycasting.html
-	startpos.x = x;     //(0,100) start position
-	startpos.y = y;
-
-	endpos.x = b.boundingbox.x;
-	endpos.y = b.boundingbox.y;
-
-	raycastLine = Line2i(startpos, endpos); // should draw a line from start postion(5,10) to endpos
-
-
 }
 
 Block::Block(int x, int y, int w, int h, SDL_Color c, int t)
 {
-	x = boundingbox.x;
-	y = boundingbox.y;
-	w = boundingbox.w;
-	h = boundingbox.h;
+	boundingbox.x = x;
+	boundingbox.y = y;
+	boundingbox.w = w;
+	boundingbox.h = h;
 
 	c = colour;
 	t = block_type;
 
 }
+
+Raycast::Raycast(Block b, int x, int y) {
+
+	//*insert raycast code here* https://lodev.org/cgtutor/raycasting.html
+	startpos.x = x;
+	startpos.y = y;
+
+	endpos.x = b.x; //need to update this for the blockz
+	endpos.y = b.y;
+
+	 
+	raycastLine = Line2i(startpos, endpos); 
+
+}
+
